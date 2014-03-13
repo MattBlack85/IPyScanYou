@@ -2,6 +2,8 @@ import socket
 
 import datetime
 
+import os
+
 import sys
 
 
@@ -65,6 +67,7 @@ def main():
     if isinstance(ports, list):
         for port in ports:
             new_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            new_socket.settimeout(1)
 
             if new_socket.connect_ex((ip, port)) == 0:
                 print("\nPort %s: opened") % port
@@ -74,6 +77,7 @@ def main():
 
     else: # We are going to scan just 1 port
         new_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        new_socket.settimeout(1)
 
         if new_socket.connect_ex((ip, ports)) == 0:
             print("\nPort %s: opened") % ports
